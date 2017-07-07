@@ -4,13 +4,21 @@
 	<title>Dependent Dropdowns in Ajax </title>
 </head>
 <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/chosen.jquery.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/custom.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/chosen.bootstrap.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/chosen.css">
+  
 
 
 <body>
-<p style="margin-left: 177px;">Dependent Dropdown in Ajax Using Codeigniter by <a href="https://fb.com/eboominathan"><span>Boominathan</span></a> :)
+<nav class="navbar navbar-default">
+  <div class="container-fluid" align="center">
+    <h4>Dependent Dropdown in Ajax Using Codeigniter</h4>
+
+    </div>
+    </nav>
 </div>
 
 
@@ -21,7 +29,7 @@
     <label class="control-label col-sm-2">Country</label>
     <div class="col-sm-4">
       <select class="form-control countries">
-       <option value="">--Select--</option>
+       <option value="">Select Country</option>
      </select>
    </div>
  </div>
@@ -29,7 +37,7 @@
   <label class="control-label col-sm-2">State</label>
   <div class="col-sm-4">
    <select class="form-control states">
-     <option value="">--Select--</option>
+     <option value="">Select State</option>
    </select>
  </div>
 </div>
@@ -37,24 +45,16 @@
   <label class="control-label col-sm-2">City</label>
   <div class="col-sm-4">
    <select class="form-control cities">
-     <option value="">--Select--</option>
+     <option value="">Select City</option>
    </select>
  </div>
  </div>
 
 </form>
+<div align="center">
+<!-- <a href="https://web.facebook.com/eboominathan" title="Boominathan" target="_blank"></a> - Boominathan</div> -->
 
 
-
-
-
-
-
-<div class="foot">
-    <b>Happy to help !</b>
-    &copy;<a href="http://www.facebook.com/eboominathan" target="_blank">Boominathan</a>
-</div>
-</p>
 
 
 
@@ -69,6 +69,9 @@
 	
   $(document).ready(function(){
 
+      $('.countries,.states,.cities').chosen({
+        allow_single_deselect: true
+        });
     /*Get the country list */
 
       $.ajax({
@@ -88,6 +91,7 @@
            option.attr('value', this.value).text(this.label);           
            $('.countries').append(option);
          });  
+          $('.countries').trigger("chosen:updated");
 
           /*ends */
           
@@ -122,6 +126,7 @@
          });  
 
           /*ends */
+          $('.states').trigger("chosen:updated");
           
         }
       });
@@ -158,6 +163,7 @@
          });  
           
           /*ends */
+          $('.cities').trigger("chosen:updated");
           
         }
       });
